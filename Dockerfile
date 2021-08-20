@@ -5,6 +5,7 @@ ARG CLOJURE_TOOLS_VERSION="1.10.3.855"
 RUN apk add --no-cache \
     aws-cli \
     bash \
+    chromium \
     coreutils \
     curl \
     docker-compose \
