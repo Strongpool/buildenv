@@ -13,21 +13,6 @@ RUN apk add --no-cache --update \
     unzip \
     yamllint
 
-# Download and install clj-kondo
-ARG CLJ_KONDO_VERSION="2021.08.03"
-RUN curl -sLO https://github.com/clj-kondo/clj-kondo/releases/download/v${CLJ_KONDO_VERSION}/clj-kondo-${CLJ_KONDO_VERSION}-linux-static-amd64.zip \
-    && unzip clj-kondo-${CLJ_KONDO_VERSION}-linux-static-amd64.zip \
-    && rm clj-kondo-${CLJ_KONDO_VERSION}-linux-static-amd64.zip \
-    && mv clj-kondo /usr/local/bin
-
-# Download and install Clojure tools
-ARG CLOJURE_TOOLS_VERSION="1.10.3.855"
-RUN curl -O https://download.clojure.org/install/linux-install-${CLOJURE_TOOLS_VERSION}.sh \
-    && chmod +x linux-install-${CLOJURE_TOOLS_VERSION}.sh \
-    && ./linux-install-${CLOJURE_TOOLS_VERSION}.sh \
-    && rm linux-install-${CLOJURE_TOOLS_VERSION}.sh \
-    && clojure -P
-
 # Download and install Nix and install
 ARG NIX_VERSION=2.3.12
 RUN wget https://nixos.org/releases/nix/nix-${NIX_VERSION}/nix-${NIX_VERSION}-$(uname -m)-linux.tar.xz \
@@ -43,6 +28,35 @@ RUN wget https://nixos.org/releases/nix/nix-${NIX_VERSION}/nix-${NIX_VERSION}-$(
     && /nix/var/nix/profiles/default/bin/nix-collect-garbage --delete-old \
     && /nix/var/nix/profiles/default/bin/nix-store --optimise \
     && /nix/var/nix/profiles/default/bin/nix-store --verify --check-contents
+
+# Download and install babashka
+ARG BABASHKA_VERSION="0.5.1"
+RUN curl -sLO https://github.com/babashka/babashka/releases/download/v${BABASHKA_VERSION}/babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz \
+    && tar -xzf babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz \
+    && mv bb /usr/local/bin \
+    && rm babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz
+
+# Download and install Clojure tools
+ARG CLOJURE_TOOLS_VERSION="1.10.3.855"
+RUN curl -O https://download.clojure.org/install/linux-install-${CLOJURE_TOOLS_VERSION}.sh \
+    && chmod +x linux-install-${CLOJURE_TOOLS_VERSION}.sh \
+    && ./linux-install-${CLOJURE_TOOLS_VERSION}.sh \
+    && rm linux-install-${CLOJURE_TOOLS_VERSION}.sh \
+    && clojure -P
+
+# Download and install gh (GitHub CLI tool)
+ARG GH_VERSION="2.0.0"
+RUN curl -sLO https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz \
+    && tar -xzf gh_${GH_VERSION}_linux_amd64.tar.gz \
+    && mv gh_${GH_VERSION}_linux_amd64/bin/gh /usr/local/bin \
+    && rm -rf gh_${GH_VERSION}_linux_amd64.tar.gz gh_${GH_VERSION}_linux_amd64
+
+# Download and install clj-kondo
+ARG CLJ_KONDO_VERSION="2021.08.06"
+RUN curl -sLO https://github.com/clj-kondo/clj-kondo/releases/download/v${CLJ_KONDO_VERSION}/clj-kondo-${CLJ_KONDO_VERSION}-linux-static-amd64.zip \
+    && unzip clj-kondo-${CLJ_KONDO_VERSION}-linux-static-amd64.zip \
+    && rm clj-kondo-${CLJ_KONDO_VERSION}-linux-static-amd64.zip \
+    && mv clj-kondo /usr/local/bin
 
 ENV \
     ENV=/etc/profile \
