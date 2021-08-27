@@ -14,7 +14,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         id: slack
         with:
-          channel: dev-log
+          channel: builds
           status: STARTING
           color: warning
         env:
@@ -57,7 +57,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           message_id: ${{ steps.slack.outputs.message_id }}
-          channel: dev-log
+          channel: builds
           status: SUCCESS
           color: good
 
@@ -69,7 +69,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           message_id: ${{ steps.slack.outputs.message_id }}
-          channel: dev-log
+          channel: builds
           status: FAILED
           color: danger
 
