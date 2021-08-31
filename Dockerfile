@@ -66,4 +66,4 @@ ENV \
     NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     NIX_PATH=/nix/var/nix/profiles/per-user/root/channels
 
-ADD voom-like-version /usr/local/bin/voom-like-version
+ADD already-succeeded save-success-version skip-ci voom-like-version /usr/local/bin/
