@@ -66,4 +66,10 @@ ENV \
     NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     NIX_PATH=/nix/var/nix/profiles/per-user/root/channels
 
-ADD already-succeeded record-success skip-ci start-docker voom-like-version /usr/local/bin/
+ADD already-succeeded \
+    ghcr-login \
+    record-success \
+    skip-ci \
+    start-docker \
+    voom-like-version \
+    /usr/local/bin/
