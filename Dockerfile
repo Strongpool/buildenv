@@ -60,9 +60,13 @@ RUN curl -sLO https://github.com/clj-kondo/clj-kondo/releases/download/v${CLJ_KO
     && mv clj-kondo /usr/local/bin
 
 # Download and install PlantUML
-#RUN curl -sLO https://github.com/plantuml/plantuml/releases/download/v1.2022.0/plantuml-1.2022.0.jar \
-#    && mv clj-kondo /usr/local/bin
-#
+ARG PLANTUML_VERSION="1.2022.0"
+RUN curl -sLO https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar \
+    && mkdir -p /usr/local/lib/plantuml \
+    && mv plantuml-${PLANTUML_VERSION}.jar /usr/local/lib/plantuml \
+    && echo -e "#!/bin/sh\n\njava -jar /usr/local/lib/plantuml/plantuml-${PLANTUML_VERSION}.jar \"\$@\"" > /usr/local/bin/plantuml \
+    && chmod 755 /usr/local/bin/plantuml
+
 ENV \
     ENV=/etc/profile \
     USER=root \
