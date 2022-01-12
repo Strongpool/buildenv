@@ -8,7 +8,9 @@ RUN apk add --no-cache --update \
     curl \
     docker-compose \
     git \
+    graphviz \
     openjdk11 \
+    plantuml \
     shellcheck \
     unzip \
     yamllint
