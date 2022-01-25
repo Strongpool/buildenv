@@ -1,6 +1,7 @@
 FROM docker:dind
 
 RUN apk add --no-cache --update \
+    asciidoctor \
     aws-cli \
     bash \
     chromium \
@@ -74,8 +75,6 @@ ENV \
     GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt \
     NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     NIX_PATH=/nix/var/nix/profiles/per-user/root/channels
-
-RUN nix-env --install -A nixpkgs.pandoc
 
 ADD already-succeeded \
     ghcr-login \
