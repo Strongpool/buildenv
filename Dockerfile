@@ -69,7 +69,7 @@ RUN curl -sLO https://github.com/plantuml/plantuml/releases/download/v${PLANTUML
     && chmod 755 /usr/local/bin/plantuml
 
 # Download and install Hugo
-ARG HUGO_VERSION="0.92.2"
+ARG HUGO_VERSION="0.83.1"
 RUN curl -sLO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz \
     && tar -xzf hugo_${HUGO_VERSION}_Linux-64bit.tar.gz \
     && mv hugo /usr/local/bin \
