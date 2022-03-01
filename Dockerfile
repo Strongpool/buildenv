@@ -10,6 +10,8 @@ RUN apk add --no-cache --update \
     docker-compose \
     git \
     graphviz \
+    nodejs \
+    npm \
     openjdk11 \
     shellcheck \
     unzip \
