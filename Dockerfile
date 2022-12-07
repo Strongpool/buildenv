@@ -14,6 +14,7 @@ RUN apk add --no-cache --update \
     npm \
     openjdk11 \
     shellcheck \
+    sqlite \
     unzip \
     yamllint
 
